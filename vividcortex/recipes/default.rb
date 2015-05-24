@@ -7,7 +7,7 @@ unless ::File.exists?('/usr/local/bin/vc-agent-007') then
   install_script = "#{Chef::Config['file_cache_path']}/vividcortex-install.sh"
 
   remote_file install_script do
-    source 'https://download.vividcortex.com/install'
+    source node["vividcortex"]["download"]
     mode '0700'
   end
 
