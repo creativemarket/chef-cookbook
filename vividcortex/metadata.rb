@@ -1,1 +1,1 @@
-name 'vividcortext'
+name 'vividcortex'
