@@ -3,8 +3,11 @@ unless node["vividcortex"]["token"] && node["vividcortex"]["token"].size == 32 t
 end
 
 unless ::File.exists?('/usr/local/bin/vc-agent-007') then
-  remote_file '/tmp/vividcortex-install.sh' do
-    source 'https://download.vividcortex.com/install'
+
+  install_script = "#{Chef::Config['file_cache_path']}/vividcortex-install.sh"
+
+  remote_file install_script do
+    source node["vividcortex"]["download"]
     mode '0700'
   end
 
@@ -14,7 +17,7 @@ unless ::File.exists?('/usr/local/bin/vc-agent-007') then
   end
 
   execute 'install' do
-    command "/tmp/vividcortex-install.sh -s -t #{node['vividcortex']['token']}"
+    command "#{install_script} -s -t #{node['vividcortex']['token']}"
     not_if do ::File.exists?('/usr/local/bin/vc-agent-007') end
   end
 
