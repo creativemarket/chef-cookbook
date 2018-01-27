@@ -1,7 +1,3 @@
-unless node["vividcortex"]["token"] && node["vividcortex"]["token"].size == 32 then
-  Chef::Application.fatal!("The 'token' attribute must be set")
-end
-
 unless ::File.exists?('/usr/local/bin/vc-agent-007') then
 
   install_script = "#{Chef::Config['file_cache_path']}/vividcortex-install.sh"
